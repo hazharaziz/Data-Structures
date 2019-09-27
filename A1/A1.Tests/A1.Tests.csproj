@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -14,6 +14,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\A1\A1.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="TestData\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
