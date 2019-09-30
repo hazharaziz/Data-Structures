@@ -18,8 +18,23 @@ namespace A2
 
         public virtual long Solve(long[] numbers)
         {
-            //write your code here
-            throw new NotImplementedException();
+            long maxProduct = numbers[0];
+            int numsLength = numbers.Length;
+            for (int i = 0; i < numsLength; i++)
+            {
+                for (int j = 0; j < numsLength; j++)
+                {
+                    if (i != j)
+                    {
+                        long product = numbers[i] * numbers[j];
+                        if (product > maxProduct)
+                        {
+                            maxProduct = product;
+                        }
+                    }
+                }
+            }
+            return maxProduct;
         }
     }
 }
