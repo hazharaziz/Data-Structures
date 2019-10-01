@@ -19,24 +19,43 @@ namespace A2
         public virtual long Solve(long[] numbers)
         {
             int numsLength = numbers.Length;
-            bool hasOneElement = numsLength >= 2 ? false : true;
             int index = 0;
             long maxProduct = long.MinValue;
-            for (int i = 1; i < numsLength; i++)
-                if (numbers[i] > numbers[index])
-                    index = i;
 
-            (numbers[numsLength - 1], numbers[index]) = (numbers[index], numbers[numsLength - 1]);
+            SetIndex(numbers, ref index, 1, numsLength);
+            Swap(ref numbers[numsLength - 1], ref numbers[index]);
             index = 0;
-            for (int i = 1; i < numsLength - 1; i++)
-                if (numbers[i] > numbers[index])
-                    index = i;
-            if (!hasOneElement)
-                (numbers[numsLength - 2], numbers[index]) = (numbers[index], numbers[numsLength - 2]);
-
-            maxProduct = !hasOneElement ? numbers[numsLength - 2] * numbers[numsLength - 1]
-                                        : maxProduct = numbers[0];
+            SetIndex(numbers, ref index, 1, numsLength - 1);
+            if (numsLength >= 2)
+                Swap(ref numbers[numsLength - 2], ref numbers[index]);
+            maxProduct = (numsLength >= 2) ? numbers[numsLength - 2] * numbers[numsLength - 1]
+                                           : maxProduct = numbers[0];
             return maxProduct;
+        }
+        
+        /// <summary>
+        /// SetIndex method for setting the index of maximum number
+        /// </summary>
+        /// <param name="nums">array of numbers</param>
+        /// <param name="index">index to be set</param>
+        /// <param name="startPoint">start point of for loop</param>
+        /// <param name="endPoint">end point of for loop</param>
+        private void SetIndex(long[] nums, ref int index, 
+                                int startPoint, int endPoint)
+        {
+            for (int i = startPoint; i < endPoint; i++)
+                if (nums[i] > nums[index])
+                    index = i;
+        }
+
+        /// <summary>
+        /// Swap method for swapping the given values
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="v2"></param>
+        private void Swap(ref long v1, ref long v2)
+        {
+            (v1, v2) = (v2, v1);
         }
     }
 }
