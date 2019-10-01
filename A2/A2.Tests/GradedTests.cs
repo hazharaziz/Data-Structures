@@ -28,7 +28,24 @@ namespace A2.Tests
         [TestMethod()]
         public void SolveTest_StressTest()
         {
-            Assert.Inconclusive();
+            Q1NaiveMaxPairWise q1NaiveMaxPairWise = new Q1NaiveMaxPairWise("TD1");
+            Q2FastMaxPairWise q2FastMaxPairWise = new Q2FastMaxPairWise("TD2");
+            Stopwatch stopwatch = Stopwatch.StartNew();
+
+            while (true)
+            {
+                Random rnd = new Random();
+                int n = rnd.Next(1, 10);
+                int m = rnd.Next(1, 10);
+                long[] arr = new long[n];
+                for (int i = 0; i < arr.Length; i++)
+                    arr[i] = rnd.Next(1, m);
+                long result1 = q1NaiveMaxPairWise.Solve(arr);
+                long result2 = q2FastMaxPairWise.Solve(arr);
+                Assert.AreEqual(result1,result2);
+                if (stopwatch.ElapsedMilliseconds >= 5000)
+                    break;
+            }
         }
 
         public static void RunTest(Processor p)
