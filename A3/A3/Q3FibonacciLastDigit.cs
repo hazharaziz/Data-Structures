@@ -12,7 +12,7 @@ namespace A3
 
         public long Solve(long n)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
