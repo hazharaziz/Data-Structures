@@ -12,7 +12,8 @@ namespace A3
 
         public long Solve(long a, long b)
         {
-            throw new NotImplementedException();
+            Q4GCD gcd = new Q4GCD("TD5");
+            return (a * b) / gcd.Solve(a, b);
         }
     }
 }
