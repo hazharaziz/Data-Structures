@@ -12,7 +12,8 @@ namespace A3
 
         public long Solve(long a, long b)
         {
-            throw new NotImplementedException();
+            (a, b) = (a <= b) ? (b, a) : (a, b);
+            return (b == 0) ? a : Solve(b, a % b);
         }
     }
 }

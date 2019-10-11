@@ -13,23 +13,20 @@ namespace A3
 
         public long Solve(long n)
         {
-            List<long> fibonacciList = new List<long>() { 0, 1 };
-            return FibonacciSolution(n, ref fibonacciList);
+            long[] fibArr = new long[n + 1];
+            if (n != 0)
+                fibArr[1] = 1;
+            return FibonacciSolution(n, ref fibArr);
         }
 
-        private long FibonacciSolution(long n, ref List<long> fibList)
+        private long FibonacciSolution(long n, ref long[] fibArr)
         {
-            long result = 0;
+            if (n <= 1)
+                return fibArr[n];
+            for (int i = 2; i <= n; i++)
+                fibArr[i] = fibArr[i - 1] + fibArr[i - 2];
 
-            if (n < fibList.Count)
-                return fibList[Convert.ToInt32(n)];
-            else
-            {
-                result = FibonacciSolution(n - 1, ref fibList) + FibonacciSolution(n - 2, ref fibList);
-                fibList.Add(result);
-                return result;
-            }
-
+            return fibArr[fibArr.Length - 1];
         }
     }
 }

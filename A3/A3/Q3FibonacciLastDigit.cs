@@ -12,7 +12,21 @@ namespace A3
 
         public long Solve(long n)
         {
-            
+            long[] fiblastDigitArr = new long[n + 1];
+            if (n != 0)
+                fiblastDigitArr[1] = 1;
+            return FibonacciSolution(n, ref fiblastDigitArr);
         }
+
+        private long FibonacciSolution(long n, ref long[] fibArr)
+        {
+            if (n <= 1)
+                return fibArr[n] % 10;
+            for (int i = 2; i <= n; i++)
+                fibArr[i] = (fibArr[i - 1] + fibArr[i - 2]) % 10;
+
+            return fibArr[fibArr.Length - 1];
+        }
+
     }
 }
