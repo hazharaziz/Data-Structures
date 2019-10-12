@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TestCommon;
 
@@ -13,21 +14,38 @@ namespace A3
 
         public long Solve(long n)
         {
-            //long[] fibLastDigitArr = new long[n + 1];
-            //if (n != 0)
-            //    fibLastDigitArr[1] = 1;
-            //FibonacciSolution(n, ref fibLastDigitArr);
-            //return fibLastDigitArr.Sum() % 10;
-            throw new NotImplementedException();
+            long pisanoPeriodLength = PisanoPeriodLength(10);
+            n = n % pisanoPeriodLength;
+            return FibonacciLastDigit(n, 10);
         }
 
-        public void FibonacciSolution(long n, long mod,
-                                                ref long[] fibArr)
+        public long FibonacciLastDigit(long n, long mod)
         {
+            long[] fibModArr = new long[n + 1];
+            fibModArr[1] = 1;
             for (int i = 2; i <= n; i++)
-                fibArr[i] = (fibArr[i - 1] + fibArr[i - 2]) % 10;
+            {
+                fibModArr[i] = (fibModArr[i - 1] + fibModArr[i - 2]) % mod;
+            }
+            return fibModArr.Sum() % 10;
         }
 
-    }
+        public long PisanoPeriodLength(long mod)
+        {
+            long prev = 0;
+            long current = 1;
+            long pisanoPeriodLength = 0;
+            for (int i = 0; i < mod * mod; i++)
+            {
+                (prev, current) = (current, (prev + current) % mod);
 
+                if (prev == 0 && current == 1)
+                {
+                    pisanoPeriodLength = i + 1;
+                    break;
+                }
+            }
+            return pisanoPeriodLength;
+        }
+    }
 }

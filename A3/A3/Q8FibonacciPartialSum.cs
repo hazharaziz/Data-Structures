@@ -12,7 +12,15 @@ namespace A3
 
         public long Solve(long a, long b)
         {
-            throw new NotImplementedException();
+            Q7FibonacciSum q7 = new Q7FibonacciSum("TD8");
+            if (a <= b)
+                (a, b) = (b, a);
+            long greaterLastDigit = q7.Solve(a);
+            long smallerLastDigit = q7.Solve(b - 1);
+
+            if (greaterLastDigit < smallerLastDigit)
+                return (greaterLastDigit + 10) - smallerLastDigit;
+            return q7.Solve(a) - q7.Solve(b - 1);
         }
     }
 }

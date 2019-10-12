@@ -15,11 +15,11 @@ namespace A3
         {
             int pisanoPeriodLength = PisanoPeriodLength(b);
             a = a % pisanoPeriodLength;
-            return FibonacciSolution(a, b, pisanoPeriodLength);
+            return FibonacciLastDigit(a, b, pisanoPeriodLength);
         }
     
 
-        public long FibonacciSolution(long n, long mod, int periodLength)
+        public long FibonacciLastDigit(long n, long mod, int periodLength)
         {
             long[] fibModArr = new long[periodLength];
             if (n != 0)
@@ -31,7 +31,7 @@ namespace A3
             return fibModArr[n % mod];
         }
 
-        private int PisanoPeriodLength(long mod)
+        public int PisanoPeriodLength(long mod)
         {
             long prev = 0;
             long current = 1;

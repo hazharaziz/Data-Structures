@@ -19,7 +19,7 @@ namespace A3
             return FibonacciSolution(n, ref fibArr);
         }
 
-        private long FibonacciSolution(long n, ref long[] fibArr)
+        public long FibonacciSolution(long n, ref long[] fibArr)
         {
             if (n <= 1)
                 return fibArr[n];
