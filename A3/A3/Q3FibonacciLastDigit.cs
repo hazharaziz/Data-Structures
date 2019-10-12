@@ -15,10 +15,12 @@ namespace A3
             long[] fiblastDigitArr = new long[n + 1];
             if (n != 0)
                 fiblastDigitArr[1] = 1;
-            return FibonacciSolution(n, ref fiblastDigitArr);
+            return getFibLastDigits(n, ref fiblastDigitArr);
         }
 
-        public long FibonacciSolution(long n, ref long[] fibArr)
+        //getFibLastDigits method for getting the last digit 
+        //of fibonacci numbers in the given array
+        public long getFibLastDigits(long n, ref long[] fibArr)
         {
             if (n <= 1)
                 return fibArr[n] % 10;

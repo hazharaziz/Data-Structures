@@ -19,6 +19,7 @@ namespace A3
             return FibonacciLastDigit(n, 10);
         }
 
+        // FibonacciLastDigit method returning the last digit of fibonacci number
         public long FibonacciLastDigit(long n, long mod)
         {
             long[] fibModArr = new long[n + 1];
@@ -30,6 +31,8 @@ namespace A3
             return fibModArr.Sum() % 10;
         }
 
+        // PisanoPeriodLength method for returning the length of 
+        // the pisano sequence
         public long PisanoPeriodLength(long mod)
         {
             long prev = 0;

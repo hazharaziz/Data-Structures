@@ -16,10 +16,12 @@ namespace A3
             long[] fibArr = new long[n + 1];
             if (n != 0)
                 fibArr[1] = 1;
-            return FibonacciSolution(n, ref fibArr);
+            return getFibArray(n, ref fibArr);
         }
 
-        public long FibonacciSolution(long n, ref long[] fibArr)
+        //getFibArray method for assigning the fibonacci numbers 
+        //in the given array
+        public long getFibArray(long n, ref long[] fibArr)
         {
             if (n <= 1)
                 return fibArr[n];

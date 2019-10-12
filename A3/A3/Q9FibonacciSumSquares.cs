@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using TestCommon;
 
 namespace A3
@@ -12,7 +13,11 @@ namespace A3
 
         public long Solve(long n)
         {
-            throw new NotImplementedException();
+            Q6FibonacciMod q6 = new Q6FibonacciMod("TD6");
+            long lastFib = q6.Solve(n, 10);
+            long preLastFib = q6.Solve(n - 1, 10);
+            return (lastFib * (preLastFib + lastFib)) % 10;
         }
+
     }
 }

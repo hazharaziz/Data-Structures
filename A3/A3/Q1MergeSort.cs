@@ -31,6 +31,7 @@ namespace A3
             return result;
         }
 
+        //Merge method for merging two arrays
         private long[] Merge(long[] right, long[] left)
         {
             long[] result = new long[right.Length + left.Length];
@@ -68,6 +69,7 @@ namespace A3
             return result;
         }
 
+        //subArray method returning the subArray of an array in a specified range
         private long[] subArray(long[] a, int startIndex, int lastIndex)
         {
             long[] result = new long[lastIndex - startIndex];

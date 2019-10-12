@@ -17,8 +17,9 @@ namespace A3
             a = a % pisanoPeriodLength;
             return FibonacciLastDigit(a, b, pisanoPeriodLength);
         }
-    
 
+        // FibonacciLastDigit method returning the last digit of a 
+        // fibonacci number by dividing the number over mod
         public long FibonacciLastDigit(long n, long mod, int periodLength)
         {
             long[] fibModArr = new long[periodLength];
@@ -28,9 +29,11 @@ namespace A3
             {
                 fibModArr[i] = (fibModArr[i - 1] + fibModArr[i - 2]) % mod;
             }
-            return fibModArr[n % mod];
+            return fibModArr[n % periodLength];
         }
 
+        // PisanoPeriodLength method for returning the length of 
+        // the pisano sequence
         public int PisanoPeriodLength(long mod)
         {
             long prev = 0;
