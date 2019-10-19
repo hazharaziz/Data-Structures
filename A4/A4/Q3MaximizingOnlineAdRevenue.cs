@@ -17,7 +17,12 @@ namespace A4
 
         public virtual long Solve(long slotCount, long[] adRevenue, long[] averageDailyClick)
         {
-            throw new NotImplementedException();
+            adRevenue = adRevenue.OrderByDescending(ad => ad).ToArray();
+            averageDailyClick = averageDailyClick.OrderByDescending(av => av).ToArray();
+            long result = 0;
+            for (long i = 0; i < slotCount; i++)
+                result += adRevenue[i] * averageDailyClick[i];
+            return result;
         }
     }
 }
