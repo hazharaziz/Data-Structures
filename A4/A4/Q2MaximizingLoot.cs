@@ -17,7 +17,38 @@ namespace A4
 
         public virtual long Solve(long capacity, long[] weights, long[] values)
         {
-            throw new NotImplementedException();
+            Item[] items = GetSortedItems(weights.Length, weights, values);
+            long maxValue = 0;
+            long totalWeight = 0;
+            long index = 0;
+
+            while (totalWeight < capacity)
+            {
+                if ((totalWeight + items[index].Weight <= capacity))
+                {
+                    maxValue += items[index].Value;
+                    totalWeight += items[index].Weight;
+                }
+                else
+                {
+                    long difference = capacity - totalWeight;
+                    maxValue += Convert.ToInt64((difference * (items[index].Value) / items[index].Weight));
+                    totalWeight += difference;
+                }
+                index++;
+            }
+            return maxValue;
+        }
+
+        //GetSortedItems method returning the sorted items(sorted by value per weight)
+        private Item[] GetSortedItems(int length, long[] weights, long[] values)
+        {
+            Item[] items = new Item[weights.Length];
+            long itemsLength = items.Length;
+            for (int i = 0; i < itemsLength; i++)
+                items[i] = new Item(weights[i], values[i]);
+            items = items.OrderByDescending(i => i.ValueDensity).ToArray();
+            return items;
         }
 
 
