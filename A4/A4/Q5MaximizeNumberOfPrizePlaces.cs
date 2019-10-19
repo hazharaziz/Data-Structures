@@ -17,7 +17,20 @@ namespace A4
 
         public virtual long[] Solve(long n)
         {
-            throw new NotImplementedException();
+            List<long> result = new List<long>();
+            long subtract = 1;
+            while (n > 0)
+            {
+                if ((n - subtract) == subtract)
+                    subtract = n;
+                if ((n - subtract) >= subtract || (n - subtract) == 0)
+                {
+                    n -= subtract;
+                    result.Add(subtract);
+                }
+                subtract++;
+            }
+            return result.ToArray();
         }
     }
 }
