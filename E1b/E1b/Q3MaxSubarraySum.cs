@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using TestCommon;
 
 namespace E1b
@@ -14,7 +15,16 @@ namespace E1b
 
         public virtual long Solve(long n, long[] numbers)
         {
-            throw new NotImplementedException();
-        }
+            long sum = 0;
+            if (n == 1)
+                sum += numbers[0];
+            else if (n == 2)
+                sum += (numbers.Max() > numbers.Sum()) ? numbers.Max() : numbers.Sum();
+            else
+            {
+                long mid = numbers.Length / 2;
+            }
+            return sum;
+        }   
     }
 }
