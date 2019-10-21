@@ -15,7 +15,41 @@ namespace E1a
 
         public virtual long Solve(long nr, long dr)
         {
-            throw new NotImplementedException();
+            double sum = 0;
+            double target = (double)nr / dr;
+            double latestDr = 1;
+            double maxDenominator = latestDr;
+
+            while (sum <= target)
+            {
+                if (target - sum <= 0.001)
+                    break;
+                double fraction;
+                if (nr % dr == 0)
+                {
+                    maxDenominator = 1;
+                    break;
+                }
+                if (sum > 0)
+                {
+                    latestDr = ((nr - (sum * dr)) == 1)
+                                    ? (dr)
+                                    : (long)Math.Ceiling(dr / (nr - (sum * dr)));
+                    fraction = (1 / latestDr);
+                    sum += fraction;
+                    maxDenominator = latestDr;
+                }
+                else
+                {
+                    fraction = 1 / latestDr;
+                    sum += ((sum + fraction) <= target) ? (fraction) : 0;
+
+                    maxDenominator = latestDr;
+                    latestDr++;
+                }
+            }
+
+            return (long)maxDenominator;
         }
     }
 }
