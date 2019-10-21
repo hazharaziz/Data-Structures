@@ -22,7 +22,7 @@ namespace E1a
 
             while (sum <= target)
             {
-                if (target - sum <= 0.001)
+                if (target - sum <= 0.0000001)
                     break;
                 double fraction;
                 if (nr % dr == 0)
@@ -30,20 +30,20 @@ namespace E1a
                     maxDenominator = 1;
                     break;
                 }
-                if (sum > 0)
+                if ((sum > 0) || (nr == 1))
                 {
                     latestDr = ((nr - (sum * dr)) == 1)
-                                    ? (dr)
-                                    : (long)Math.Ceiling(dr / (nr - (sum * dr)));
+                               ? (dr)
+                               : Math.Floor(dr / (nr - (sum * dr)));
                     fraction = (1 / latestDr);
-                    sum += fraction;
+                    sum += (sum + fraction <= target) ? fraction : 0;
                     maxDenominator = latestDr;
                 }
                 else
                 {
-                    fraction = 1 / latestDr;
-                    sum += ((sum + fraction) <= target) ? (fraction) : 0;
-
+                    latestDr = (long)Math.Ceiling((double)dr / nr);
+                    fraction = (1 / latestDr);
+                    sum += (sum + fraction <= target) ? fraction : 0;
                     maxDenominator = latestDr;
                     latestDr++;
                 }
