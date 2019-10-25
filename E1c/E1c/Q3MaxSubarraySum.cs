@@ -14,7 +14,20 @@ namespace E1c
 
         public virtual long Solve(long n, long[] numbers)
         {
-            throw new NotImplementedException();
+            long maxSum = long.MinValue;
+            long currentSum = 0;
+
+            for (long i = 0; i < n; i++)
+            {
+                if (currentSum <= 0)
+                    currentSum = numbers[i];
+                else
+                    currentSum += numbers[i];
+                if (currentSum > maxSum)
+                    maxSum = currentSum;
+            }
+
+            return maxSum;
         }
     }
 }
