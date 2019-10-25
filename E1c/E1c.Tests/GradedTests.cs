@@ -14,7 +14,7 @@ namespace E1c.Tests
             RunTest(new Q2UnitFractions("TD2"));
         }
 
-        [TestMethod()/*, Timeout(1500)*/]
+        [TestMethod(), Timeout(1500)]
         public void SolveTest_Q3MaxSubarraySum()
         {
             RunTest(new Q3MaxSubarraySum("TD3"));
