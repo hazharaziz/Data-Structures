@@ -31,6 +31,7 @@ namespace A5
             }
         }
 
+        //3-way partition method
         private long[] Partition(long[] arr, long low, long high)
         {
             long leftPartition = low;
