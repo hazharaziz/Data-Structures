@@ -12,26 +12,31 @@ namespace A5.Tests
         {
             RunTest(new Q1BinarySearch("TD1"));
         }
+
         [TestMethod(), Timeout(1000)]
         public void SolveTest_Q2MajorityElement()
         {
             RunTest(new Q2MajorityElement("TD2"));
         }
+
         [TestMethod(), Timeout(1000)]
         public void SolveTest_Q3ImprovingQuickSort()
         {
             RunTest(new Q3ImprovingQuickSort("TD3"));
         }
+
         [TestMethod(), Timeout(1000)]
         public void SolveTest_Q4NumberOfInversions()
         {
             RunTest(new Q4NumberOfInversions("TD4"));
         }
+
         [TestMethod(), Timeout(1000)]
         public void SolveTest_Q5OrganizingLottery()
         {
             RunTest(new Q5OrganizingLottery("TD5"));
         }
+
         [TestMethod(), Timeout(1000)]
         public void SolveTest_Q6ClosestPoints()
         {
