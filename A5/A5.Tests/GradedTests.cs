@@ -27,7 +27,7 @@ namespace A5.Tests
         {
             RunTest(new Q4NumberOfInversions("TD4"));
         }
-        [TestMethod()/*, Timeout(1000)*/]
+        [TestMethod(), Timeout(1000)]
         public void SolveTest_Q5OrganizingLottery()
         {
             RunTest(new Q5OrganizingLottery("TD5"));
