@@ -19,7 +19,7 @@ namespace A6
             RunTest(new Q1MoneyChange("TD1"));
         }
 
-        [TestMethod(), Timeout(1000)]
+        [TestMethod()/*, Timeout(1000)*/]
         public void SolveTest_Q2PrimitiveCalculator()
         {
             RunTest(new Q2PrimitiveCalculator("TD2"));
