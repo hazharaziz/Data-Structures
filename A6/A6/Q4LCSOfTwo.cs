@@ -28,6 +28,7 @@ namespace A6
             return LCSMatrix[seq1.Length][seq2.Length];
         }
 
+        //GetLCSMatrix Method returning the LCS matrix
         private long[][] GetLCSMatrix(long[] seq1, long[] seq2)
         {
             long[][] LCSMatrix = new long[seq1.Length + 1][];

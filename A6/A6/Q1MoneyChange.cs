@@ -22,6 +22,7 @@ namespace A6
             return ChangeMoney(n, ref minCoinsCount);
         }
 
+        //ChangeMoney Method returning the minimum numbers of coins
         private long ChangeMoney(long n, ref long[] minCoinsCount)
         {
             minCoinsCount[0] = 0;

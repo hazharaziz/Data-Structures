@@ -33,6 +33,7 @@ namespace A6
             return distMatrix[str1.Length][str2.Length];
         }
 
+        //GetDistMatrix Method returning the distance matrix
         private static long[][] GetDistMatrix(string str1, string str2)
         {
             long[][] distanceMatrix = new long[str1.Length + 1][];
@@ -45,6 +46,7 @@ namespace A6
             return distanceMatrix;
         }
 
+        //Min Method returning the minimum number in an array
         private long Min(params long[] numbers)
         {
             long min = long.MaxValue;

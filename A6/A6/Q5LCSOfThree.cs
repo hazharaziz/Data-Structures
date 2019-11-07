@@ -32,6 +32,7 @@ namespace A6
             return LCSMatrix[seq1.Length][seq2.Length][seq3.Length];
         }
 
+        //Max Method returning the maximum number in an array
         private long Max(params long[] numbers)
         {
             long max = long.MinValue;
@@ -41,6 +42,7 @@ namespace A6
             return max;
         }
 
+        //GetLCSMatrix Method returning the LCS matrix
         private long[][][] GetLCSMatrix(long length1, long length2, long length3)
         {
             long[][][] LCSMatrix = new long[length1 + 1][][];
