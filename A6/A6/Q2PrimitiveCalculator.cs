@@ -20,13 +20,13 @@ namespace A6
             long[] resultSeq = SequenceNums(n, counts);
             return resultSeq;
         }
-
+        
         //SequenceNums Method returning the sequence of the numbers
         private long[] SequenceNums(long n, long[] counts)
         {
             long[] result = new long[counts[n] + 1];
-            result[0] = n;
-            long idx = 1;
+            result[result.Length - 1] = n;
+            long idx = result.Length - 2;
             while (n > 1)
             {
                 long minCount;
@@ -50,9 +50,9 @@ namespace A6
                         n /= 3;
                         break;
                 }
-                idx++;
+                idx--;
             }
-            return result.Reverse().ToArray();
+            return result;
         }
 
         //minNumsCount Method returning the numbers minimum count
