@@ -25,7 +25,7 @@ namespace A6
             RunTest(new Q2PrimitiveCalculator("TD2"));
         }
 
-        [TestMethod()/*, Timeout(1000)*/]
+        [TestMethod(), Timeout(1000)]
         public void SolveTest_Q3EditDistance()
         {
             RunTest(new Q3EditDistance("TD3"));
