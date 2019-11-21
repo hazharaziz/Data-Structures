@@ -15,7 +15,39 @@ namespace A8
 
         public long Solve(string str)
         {
-            throw new NotImplementedException();
+            BracketStack<Bracket> stack = new BracketStack<Bracket>();
+            long index = -1;
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (str[i] == '(' || str[i] == '[' || str[i] == '{')
+                    stack.Push(new Bracket(str[i], i));
+                if (str[i] == ')' || str[i] == ']' || str[i] == '}')
+                {
+                    if (stack.IsEmpty())
+                        return i + 1;
+                    else
+                    {
+                        char top = stack.Pop().Character;
+                        if (Match(str[i], top))
+                            return i + 1;
+                    }
+                }
+            }
+
+            if (!stack.IsEmpty())
+            {
+                Bracket top = stack.Pop();
+                return top.Index + 1;
+            }
+
+            return index;
         }
+
+        private bool Match(char ch1, char ch2) =>
+            (ch1 != ')' && ch2 == '(') ||
+            (ch1 != ']' && ch2 == '[') ||
+            (ch1 != '}' && ch2 == '{');
+
     }
 }
