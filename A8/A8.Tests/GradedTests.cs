@@ -7,7 +7,7 @@ namespace A8.Tests
     [TestClass()]
     public class GradedTests
     {
-        [TestMethod()/*, Timeout(300)*/]
+        [TestMethod(), Timeout(300)]
         public void SolveTest_Q1CheckBrackets()
         {
             RunTest(new Q1CheckBrackets("TD1"));
