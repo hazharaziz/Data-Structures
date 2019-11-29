@@ -18,7 +18,33 @@ namespace A8
             long[] arrivalTimes, 
             long[] processingTimes)
         {
-            throw new NotImplementedException();
+            long[] startTimes = new long[0];
+            long length = arrivalTimes.Length;
+            Queue<long> finishTimes = new Queue<long>();
+            if (length > 0)
+            {
+                startTimes = new long[length];
+                long index = 0;
+                long time = arrivalTimes[0];
+                for (long i = 0; i < length; i++)
+                {
+                    while (finishTimes.Count > 0 &&
+                        finishTimes.Peek() <= arrivalTimes[i])
+                        finishTimes.Dequeue();
+                    if (finishTimes.Count < bufferSize)
+                    {
+                        finishTimes.Enqueue(time + processingTimes[i]);
+                        startTimes[index] = (arrivalTimes[i] > time) ?
+                                            arrivalTimes[i] : time;
+                        time += (arrivalTimes[i] > time) ?
+                                arrivalTimes[i] - time : processingTimes[i];
+                    }
+                    else
+                        startTimes[index] = -1;
+                    index++;
+                }
+            }
+            return startTimes;
         }
     }
 }
