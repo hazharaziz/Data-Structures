@@ -44,6 +44,12 @@ namespace A8
             return index;
         }
 
+        /// <summary>
+        /// Returns true if the characters are pairs of each other
+        /// </summary>
+        /// <param name="ch1"></param>
+        /// <param name="ch2"></param>
+        /// <returns></returns>
         private bool Match(char ch1, char ch2) =>
             (ch1 != ')' && ch2 == '(') ||
             (ch1 != ']' && ch2 == '[') ||

@@ -24,6 +24,12 @@ namespace A8
             return treeHight;
         }
 
+        /// <summary>
+        /// Returns the tree hight
+        /// </summary>
+        /// <param name="nodes"></param>
+        /// <param name="rootIndex"></param>
+        /// <returns></returns>
         private long TreeHeight(Node[] nodes, long rootIndex)
         {
             long height = 0;
@@ -44,6 +50,13 @@ namespace A8
             return height;
         }
 
+        /// <summary>
+        /// Returns the root index of the tree and constructs the graph
+        /// </summary>
+        /// <param name="nodeCount"></param>
+        /// <param name="tree"></param>
+        /// <param name="nodes"></param>
+        /// <returns></returns>
         private long MakeGraph(long nodeCount, long[] tree, Node[] nodes)
         {
             long rootIndex = 0;
