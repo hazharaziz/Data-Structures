@@ -1006,7 +1006,22 @@ namespace TestCommon
                     }
                 }
                 */
+        public static void ApproximateLongVerifier(string inFileName, string strResult)
+        {
+            string outFile = inFileName.Replace("In_", "Out_");
+            Assert.IsTrue(File.Exists(outFile));
 
+            var expectedLines = File.ReadAllLines(outFile)
+                .Select(line => line.Trim(IgnoreChars)) // Ignore white spaces 
+                .Where(line => !string.IsNullOrWhiteSpace(line)); // Ignore empty lines
+
+            strResult = strResult.Replace("\r\n", "\n");
+
+            var res = long.Parse(strResult);
+            var exp = long.Parse(expectedLines.First());
+
+            Assert.IsTrue(Math.Abs(res - exp) <= 1, $"TestCase:{Path.GetFileName(inFileName)}");
+        }
     }
 
     class TSPPathVerifier
