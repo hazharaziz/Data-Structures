@@ -52,8 +52,8 @@ namespace TestCommon
                 cipher[i] = BigInteger.Parse(input[i]);
             }
             return solve(n, e, cipher);*/
-            
-           
+
+
 
             var cipher = lines[2].Split(IgnoreChars, StringSplitOptions.RemoveEmptyEntries)
                                  .Select(x => BigInteger.Parse(x)).ToArray();
@@ -114,7 +114,7 @@ namespace TestCommon
 
         public static string Process(string inStr, Func<long, long[][], Tuple<long, long[]>> solve)
         {
-            var lines = inStr.Split(NewLineChars,StringSplitOptions.RemoveEmptyEntries);
+            var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
             long nodeCount, edgeCount;
             ParseTwoNumbers(lines[0], out nodeCount, out edgeCount);
             var graph = ReadTree(lines.Skip(1));
@@ -128,7 +128,7 @@ namespace TestCommon
 
         public static string Process(string inStr, Func<long, long[], long[][], long> solve)
         {
-            var lines = inStr.Split(NewLineChars,StringSplitOptions.RemoveEmptyEntries);
+            var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
             long n = long.Parse(lines[0]);
             var funFactors = lines[1].Split(IgnoreChars, StringSplitOptions.RemoveEmptyEntries)
                 .Select(x => long.Parse(x)).ToArray();
@@ -263,7 +263,7 @@ namespace TestCommon
             var toks = inStr.Split(IgnoreChars, StringSplitOptions.RemoveEmptyEntries);
             var text = toks[0];
             long[] sa = new long[text.Length];
-            for(int i = 1; i <= text.Length; i++)
+            for (int i = 1; i <= text.Length; i++)
             {
                 sa[i - 1] = long.Parse(toks[i]);
             }
@@ -285,8 +285,8 @@ namespace TestCommon
         {
             return solve(inStr.Trim(IgnoreChars));
         }
-       
- 	    public static string Process(string inStr, Func<string, string, string> solve)
+
+        public static string Process(string inStr, Func<string, string, string> solve)
         {
             var tokens = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
             var str1 = tokens[0];
@@ -299,7 +299,7 @@ namespace TestCommon
             return string.Join("\n", solve(inStr.Trim(IgnoreChars)));
         }
 
-        public static string Process(string inStr, 
+        public static string Process(string inStr,
             Func<string, long, string[], long[]> solve,
             string outDelim = Space)
         {
@@ -316,8 +316,8 @@ namespace TestCommon
             Func<string, string> Processor,
             string TestDataName,
             Action<string, string> Verifier,
-            bool VerifyResultWithoutOrder=false,
-            HashSet<int> excludedTestCases=null) =>
+            bool VerifyResultWithoutOrder = false,
+            HashSet<int> excludedTestCases = null) =>
                             RunLocalTest(
                                     AssignmentName,
                                     Processor,
@@ -574,7 +574,7 @@ namespace TestCommon
 
 
         public static string Process(
-            string inStr, 
+            string inStr,
             Func<string, string, long[]> processor,
             string outDelim = Space)
         {
@@ -823,6 +823,33 @@ namespace TestCommon
                 longProcessor(list1, list2.ToArray(), list3.ToArray()));
         }
 
+        public static string Process(string inStr, Func<long, long, long[], long[], long> longProcessor)
+        {
+            var lines = inStr.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+            ParseTwoNumbers(lines[0], out long d, out long e);
+            var list1 = new List<long>();
+            var list2 = new List<long>();
+            using (StringReader reader = new StringReader(inStr))
+            {
+                string line = null;
+                string firstLine = reader.ReadLine();
+                while (null != (line = reader.ReadLine()))
+                {
+                    if (string.IsNullOrWhiteSpace(line))
+                        continue;
+
+                    long a, b;
+                    ParseTwoNumbers(line, out a, out b);
+                    list1.Add(a);
+                    list2.Add(b);
+                }
+
+            }
+
+            return longProcessor(d, e, list1.ToArray(), list2.ToArray()).ToString(); ;
+        }
+
+
         private static long ReadParallelArray(string inStr,
             List<long> list1, List<long> list2)
         {
@@ -855,132 +882,130 @@ namespace TestCommon
             a = long.Parse(toks[0]);
             b = long.Parse(toks[1]);
         }
-/* Only used in SatSolver for Algorithm Class
-        public static void SatVerifier(
-            string inFileName,
-            string strResult)
-        {
-            string outFile = inFileName.Replace("In", "Out");
-            string expected = File.ReadAllText(outFile);
+        /* Only used in SatSolver for Algorithm Class
+                public static void SatVerifier(
+                    string inFileName,
+                    string strResult)
+                {
+                    string outFile = inFileName.Replace("In", "Out");
+                    string expected = File.ReadAllText(outFile);
 
-            Debug.WriteLine($"Solving {Path.GetFileName(outFile)}");
+                    Debug.WriteLine($"Solving {Path.GetFileName(outFile)}");
 
-            var lines = strResult.Split(TestTools.NewLineChars, StringSplitOptions.RemoveEmptyEntries);
+                    var lines = strResult.Split(TestTools.NewLineChars, StringSplitOptions.RemoveEmptyEntries);
 
-            long expCount, varCount;
-            TestTools.ParseTwoNumbers(lines[0], out expCount, out varCount);
-            //Abort after 500ms
-            AbortPolicy abortPolicy = new AbortPolicy(5000);
-            var sat = new SatSolverParams(abortPolicy.TimeOver);
-            List<Literal[]> cnf = lines
-                     .Skip(1)
-                     .Select(e => e.Split(TestTools.IgnoreChars, StringSplitOptions.RemoveEmptyEntries)
-                                   .Select(s => int.Parse(s))
-                                   .Where(v => v != 0)
-                                   .Select(v => new Literal(Math.Abs(v), v > 0))
-                                   .ToArray())
-                     .ToList();
-            var result = SatSolver.Solve(sat, (int)varCount + 1, cnf);
-            bool bSat = result.Any();
-            Debug.WriteLine($"Solution found: {bSat}");
-            var bExpectedSat =
-                expected.Trim(TestTools.IgnoreChars) == "SATISFIABLE";
+                    long expCount, varCount;
+                    TestTools.ParseTwoNumbers(lines[0], out expCount, out varCount);
+                    //Abort after 500ms
+                    AbortPolicy abortPolicy = new AbortPolicy(5000);
+                    var sat = new SatSolverParams(abortPolicy.TimeOver);
+                    List<Literal[]> cnf = lines
+                             .Skip(1)
+                             .Select(e => e.Split(TestTools.IgnoreChars, StringSplitOptions.RemoveEmptyEntries)
+                                           .Select(s => int.Parse(s))
+                                           .Where(v => v != 0)
+                                           .Select(v => new Literal(Math.Abs(v), v > 0))
+                                           .ToArray())
+                             .ToList();
+                    var result = SatSolver.Solve(sat, (int)varCount + 1, cnf);
+                    bool bSat = result.Any();
+                    Debug.WriteLine($"Solution found: {bSat}");
+                    var bExpectedSat =
+                        expected.Trim(TestTools.IgnoreChars) == "SATISFIABLE";
 
-            Assert.AreEqual(bExpectedSat, bSat);
-        }
-
-
-        public static void SatAssignmentVerifier(
-            string inFileName,
-            string strResult)
-        {
-            string outFile = inFileName.Replace("In", "Out");
-            var expectedLines = File.ReadAllLines(outFile);
-            var inCNFLines = File.ReadAllLines(inFileName);
-            var actualLines = strResult.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
-
-            Debug.WriteLine($"Solving {Path.GetFileName(outFile)}");
-
-            bool expectedSat = expectedLines.First().Trim() == "SATISFIABLE";
-            bool actualSat = actualLines.First().Trim() == "SATISFIABLE";
-
-            Assert.AreEqual(expectedSat, actualSat);
-
-            // If the asnwer is UNSAT no further checking
-            if (!expectedSat)
-                return;
-
-            // Parse the provided assignment
-            var assignment = actualLines.Last()
-                .Split(IgnoreChars, StringSplitOptions.RemoveEmptyEntries)
-                .Select(l => long.Parse(l))
-                .ToArray();
-
-            // Map the assignemnt to a 0/1 array 
-            long[] assignmentMap = new long[assignment.Length + 1];
-            foreach (var l in assignment)
-                assignmentMap[Math.Abs(l)] = l < 0 ? 0 : 1;
-
-            // Parse input to ensure provided assignment satisfies all clauses.
-            bool assignmentSat = inCNFLines.Skip(1)
-                .Select(l => l.Split(IgnoreChars, StringSplitOptions.RemoveEmptyEntries)
-                              .Select(t => long.Parse(t)).ToArray())
-                .All(clause => {
-                    return clause.Sum(l => 
-                    l > 0 ?
-                        assignmentMap[Math.Abs(l)]:
-                        assignmentMap[Math.Abs(l)] ^ 1
-                        ) > 0;
-                });
-
-            Assert.IsTrue(assignmentSat, $"SAT Claim but UNSAT Assignment.");
-        }
+                    Assert.AreEqual(bExpectedSat, bSat);
+                }
 
 
-        public static void TSPVerifier(string inFileName, string strResult)
-        {
-            string outFile = inFileName.Replace("In", "Out");
-            long expectedLength = long.Parse(
-                File.ReadAllLines(outFile).First().Trim(IgnoreChars));
+                public static void SatAssignmentVerifier(
+                    string inFileName,
+                    string strResult)
+                {
+                    string outFile = inFileName.Replace("In", "Out");
+                    var expectedLines = File.ReadAllLines(outFile);
+                    var inCNFLines = File.ReadAllLines(inFileName);
+                    var actualLines = strResult.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
 
-            var lines = strResult.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
-            long actualLength = long.Parse(lines[0]);
+                    Debug.WriteLine($"Solving {Path.GetFileName(outFile)}");
 
-            Assert.AreEqual(expectedLength, actualLength);
+                    bool expectedSat = expectedLines.First().Trim() == "SATISFIABLE";
+                    bool actualSat = actualLines.First().Trim() == "SATISFIABLE";
 
-            if (expectedLength == -1)
-                return; // No need for futher verification
+                    Assert.AreEqual(expectedSat, actualSat);
 
-            long[] actualPath = lines[1].Split(IgnoreChars)
-                .Select(t => long.Parse(t)-1).ToArray();
+                    // If the asnwer is UNSAT no further checking
+                    if (!expectedSat)
+                        return;
 
-            TSPPathVerifier verifier = new TSPPathVerifier(actualPath, actualLength);
+                    // Parse the provided assignment
+                    var assignment = actualLines.Last()
+                        .Split(IgnoreChars, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(l => long.Parse(l))
+                        .ToArray();
 
-            Process(File.ReadAllText(inFileName),
-                (Func<long, long[][], Tuple<long, long[]>>)verifier.ValidTSPPath);
-        }
+                    // Map the assignemnt to a 0/1 array 
+                    long[] assignmentMap = new long[assignment.Length + 1];
+                    foreach (var l in assignment)
+                        assignmentMap[Math.Abs(l)] = l < 0 ? 0 : 1;
+
+                    // Parse input to ensure provided assignment satisfies all clauses.
+                    bool assignmentSat = inCNFLines.Skip(1)
+                        .Select(l => l.Split(IgnoreChars, StringSplitOptions.RemoveEmptyEntries)
+                                      .Select(t => long.Parse(t)).ToArray())
+                        .All(clause => {
+                            return clause.Sum(l => 
+                            l > 0 ?
+                                assignmentMap[Math.Abs(l)]:
+                                assignmentMap[Math.Abs(l)] ^ 1
+                                ) > 0;
+                        });
+
+                    Assert.IsTrue(assignmentSat, $"SAT Claim but UNSAT Assignment.");
+                }
 
 
-        public static void GraphColorVerifier(string inFileName, string strResult)
-        {
-            string outFile = inFileName.Replace("In", "Out");
-            bool isPossibleExpected = File.ReadAllText(outFile)
-                .Trim(IgnoreChars).ToLower() != "impossible";
+                public static void TSPVerifier(string inFileName, string strResult)
+                {
+                    string outFile = inFileName.Replace("In", "Out");
+                    long expectedLength = long.Parse(
+                        File.ReadAllLines(outFile).First().Trim(IgnoreChars));
 
-            bool isPossibleActual = strResult.Trim(IgnoreChars).ToLower() != "impossible";
+                    var lines = strResult.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
+                    long actualLength = long.Parse(lines[0]);
 
-            if (!isPossibleExpected)
-                Assert.IsFalse(isPossibleActual, "Solution provided but none possible.");
-            else
-            {
-                var colorAssignment = strResult.ToCharArray();
-                ColorAssignmentVerifier verifier = new ColorAssignmentVerifier(colorAssignment);
-                Process(File.ReadAllText(inFileName), verifier.ValidateColorAssignment);
-            }
-        }
-        */
+                    Assert.AreEqual(expectedLength, actualLength);
 
-        
+                    if (expectedLength == -1)
+                        return; // No need for futher verification
+
+                    long[] actualPath = lines[1].Split(IgnoreChars)
+                        .Select(t => long.Parse(t)-1).ToArray();
+
+                    TSPPathVerifier verifier = new TSPPathVerifier(actualPath, actualLength);
+
+                    Process(File.ReadAllText(inFileName),
+                        (Func<long, long[][], Tuple<long, long[]>>)verifier.ValidTSPPath);
+                }
+
+
+                public static void GraphColorVerifier(string inFileName, string strResult)
+                {
+                    string outFile = inFileName.Replace("In", "Out");
+                    bool isPossibleExpected = File.ReadAllText(outFile)
+                        .Trim(IgnoreChars).ToLower() != "impossible";
+
+                    bool isPossibleActual = strResult.Trim(IgnoreChars).ToLower() != "impossible";
+
+                    if (!isPossibleExpected)
+                        Assert.IsFalse(isPossibleActual, "Solution provided but none possible.");
+                    else
+                    {
+                        var colorAssignment = strResult.ToCharArray();
+                        ColorAssignmentVerifier verifier = new ColorAssignmentVerifier(colorAssignment);
+                        Process(File.ReadAllText(inFileName), verifier.ValidateColorAssignment);
+                    }
+                }
+                */
         public static void ApproximateLongVerifier(string inFileName, string strResult)
         {
             string outFile = inFileName.Replace("In_", "Out_");
@@ -997,12 +1022,11 @@ namespace TestCommon
 
             Assert.IsTrue(Math.Abs(res - exp) <= 1, $"TestCase:{Path.GetFileName(inFileName)}");
         }
-
     }
 
     class TSPPathVerifier
     {
-        public TSPPathVerifier(long [] actualPath, long actualPathLength)
+        public TSPPathVerifier(long[] actualPath, long actualPathLength)
         {
             this.ActualPath = actualPath;
             this.ActualPathLength = actualPathLength;
@@ -1017,19 +1041,20 @@ namespace TestCommon
             long sum = 0;
             long?[,] matrix = new long?[nodeCount, nodeCount];
 
-            edges.ToList().ForEach(e => {
-                matrix[e[0]-1, e[1]-1] = e[2];
-                matrix[e[1]-1, e[0]-1] = e[2];
+            edges.ToList().ForEach(e =>
+            {
+                matrix[e[0] - 1, e[1] - 1] = e[2];
+                matrix[e[1] - 1, e[0] - 1] = e[2];
             });
 
 
-            for(int i=0; i<ActualPath.Length-1; i++)
+            for (int i = 0; i < ActualPath.Length - 1; i++)
             {
                 Assert.IsNotNull(matrix[ActualPath[i], ActualPath[i + 1]]);
                 sum += matrix[ActualPath[i], ActualPath[i + 1]].Value;
             }
             Assert.IsNotNull(
-                matrix[ ActualPath[ActualPath.Length - 1], 
+                matrix[ActualPath[ActualPath.Length - 1],
                         ActualPath[0]]);
 
             sum += matrix[ActualPath[ActualPath.Length - 1],
@@ -1058,8 +1083,8 @@ namespace TestCommon
 
             foreach (var e in edges)
                 Assert.AreNotEqual(
-                    this.Assignment[e[0]-1],
-                    this.Assignment[e[1]-1]
+                    this.Assignment[e[0] - 1],
+                    this.Assignment[e[1] - 1]
                     );
 
             return null;
