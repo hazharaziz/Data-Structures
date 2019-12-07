@@ -24,8 +24,6 @@ namespace A9
                 foodStops[i] = new FoodStop(distance[i], food[i]);
             foodStops[length] = new FoodStop(0);
             foodStops = foodStops.OrderByDescending(fs => fs.Distance).ToArray();
-            FoodStop[] pq = new FoodStop[length];
-
 
             long stopCount = 0;
                 
@@ -50,7 +48,6 @@ namespace A9
                         return -1;
                     i--;
                 }
-
             }
 
             return stopCount;
