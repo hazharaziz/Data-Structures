@@ -13,7 +13,7 @@ namespace A9
         public override string Process(string inStr) =>
             TestTools.Process(inStr, (Func<long[], Tuple<long, long>[]>)Solve);
 
-        public Tuple<long, long>[] Solve(long[] array)
+        public Tuple<long,  long>[] Solve(long[] array)
         {
             List<Tuple<long, long>> swapPairs = new List<Tuple<long, long>>();
             long size = array.Length;
