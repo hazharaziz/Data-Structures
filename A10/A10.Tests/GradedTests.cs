@@ -13,7 +13,7 @@ namespace A10.Tests
     [TestClass()]
     public class GradedTests
     {
-        [TestMethod(), Timeout(1000)]
+        [TestMethod(), Timeout(1300)]
         public void SolveTest_Q1PhoneBook()
         {
             RunTest(new Q1PhoneBook("TD1"));
