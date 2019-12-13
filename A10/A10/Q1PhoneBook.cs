@@ -23,107 +23,145 @@ namespace A10
 
         public override string Process(string inStr) =>
             TestTools.Process(inStr, (Func<string[], string[]>)Solve);
+            
+        public Node[] PhoneBookList;
 
-        protected Dictionary<int, string> PhoneBookList;
-
-        public string[] Solve(string [] commands)
+        public string[] Solve(string[] commands)
         {
 
-            //PhoneBookList = new Node[10000];
-            PhoneBookList = new Dictionary<int, string>();
+            long length = commands.Length;
+            PhoneBookList = new Node[length];
             List<string> result = new List<string>();
-            bool hasKey = false;
             foreach (var cmd in commands)
             {
                 var toks = cmd.Split();
                 var cmdType = toks[0];
                 var args = toks.Skip(1).ToArray();
                 int number = int.Parse(args[0]);
-                //int hash = Hash(number);
-                hasKey = (PhoneBookList.ContainsKey(number));
+                long hash = Hash(number, length);
                 switch (cmdType)
                 {
                     case "add":
-                        Add(args[1], number, hasKey);
+                        Add(args[1], number, hash);
                         break;
                     case "del":
-                        Delete(number);
+                        Delete(number, hash);
                         break;
                     case "find":
-                        result.Add(Find(number, hasKey));
+                        result.Add(Find(number, hash));
                         break;
                 }
             }
             return result.ToArray();
         }
 
-        public void Add(string name, int number, bool hasKey)
+        public void Add(string name, int number, long hash)
         {
-            if (hasKey)
-                PhoneBookList[number] = name;
+            Node temp = PhoneBookList[hash];
+            if (temp == null)
+                temp = new Node(name, number);
             else
-                PhoneBookList.Add(number, name);
-            //if (PhoneBookList[hash] == null)
-            //    PhoneBookList[hash] = new Node(name, number);
-            //else
-            //{
-            //    Node newNode = new Node(name, number);
-            //    newNode.Next = PhoneBookList[hash];
-            //    PhoneBookList[hash] = newNode;
-            //}
+            {
+                if (Find(number, hash) == "not found")
+                    temp = InsertFront(name, number, temp);
+                else
+                    OverrideNode(name, number, temp);
+            }
+            PhoneBookList[hash] = temp;
         }
 
-        public string Find(int number, bool hasKey)
+        private void OverrideNode(string name, int number, Node temp)
         {
-            if (hasKey)
-                return PhoneBookList[number];
+            Node result = temp;
+            while (result != null)
+            {
+                if (result.Contact.Number == number)
+                    result.Contact.Name = name;
+                result = result.Next;
+            }
+        }
+
+        private Node InsertFront(string name, int number, Node temp)
+        {
+            Node newNode = new Node(name, number);
+            newNode.Next = temp;
+            temp = newNode;
+            return temp;
+        }
+
+        public string Find(int number, long hash)
+        {
+            Node temp = PhoneBookList[hash];
+            while (temp != null)
+            {
+                if (temp.Contact.Number == number)
+                    return temp.Contact.Name;
+                temp = temp.Next;
+            }
             return "not found";
-            //Node temp = PhoneBookList[hash];
-            //while (temp != null)
-            //{
-            //    if (temp.Contact.Number == number)
-            //        return temp.Contact.Name;
-            //    temp = temp.Next;
-            //}
-            //return "not found";
         }
 
-        public void Delete(int number)
+        public void Delete(int number, long hash)
         {
-            PhoneBookList.Remove(number);
-            //Node temp = PhoneBookList[hash];
-            //if (temp != null)
-            //{
-            //    if (temp.Contact.Number == number)
-            //    {
-            //        temp = temp.Next;
-            //        PhoneBookList[hash] = temp;
-            //    }
-            //    else
-            //    {
-            //        Node cur = temp;
-            //        Node prev = null;
-            //        while (cur != null && cur.Contact.Number != number)
-            //        {
-            //            prev = cur;
-            //            cur = cur.Next;
-            //        }
-            //        if (cur != null)
-            //        {
-            //            prev.Next = cur.Next;
-            //            PhoneBookList[hash] = prev;
-            //        }
-            //    }
-            //}
+            Node temp = PhoneBookList[hash];
+            if (temp != null)
+            {
+                if (temp.Contact.Number == number)
+                    temp = temp.Next;
+                else
+                {
+                    Node pre = FindPrev(temp, number);
+                    Node next = null;
+                    if (pre.Next != null)
+                    {
+                        next = pre.Next.Next;
+                        pre.Next.Next = null;
+                    }
+                    pre.Next = next;
+                }
+            }
+            PhoneBookList[hash] = temp;
         }
 
-        public int Hash(int number)
+        public Node FindPrev(Node head, int number)
         {
-            int a = 20;
-            int b = 20;
-            int p = 10000019;
-            int m = 10000;
-            return ((a * number + b) % p) % m;
+            Node result = head;
+            if (result != null)
+            {
+                while (result.Next != null && result.Next.Contact.Number != number)
+                {
+                    result = result.Next;
+                }
+            }
+            return result;
+        }
+
+        public void AddLast(Node head, string name, int number)
+        {
+            Node newNode = new Node(name, number);
+            if (head == null)
+                head = newNode;
+            else
+            {
+                Node lastNode = GetLastNode(head);
+                lastNode.Next = newNode;
+            }
+        }
+
+        public Node GetLastNode(Node head)
+        {
+            Node temp = head;
+            while (temp.Next != null)
+                temp = temp.Next;
+            return temp;
+        }
+
+        public long Hash(long number, long length)
+        {
+            long p = 6721739;
+            long a = 100;
+            long b = 200;
+            return ((a * number + b) % p) % length;
         }
     }
 }
