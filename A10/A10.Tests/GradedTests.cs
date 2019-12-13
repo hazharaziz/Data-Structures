@@ -13,7 +13,7 @@ namespace A10.Tests
     [TestClass()]
     public class GradedTests
     {
-        [TestMethod(), Timeout(1500)]
+        [TestMethod(), Timeout(1000)]
         public void SolveTest_Q1Phoneook()
         {
             RunTest(new Q1PhoneBook("TD1"));
@@ -26,7 +26,7 @@ namespace A10.Tests
         }
 
 
-        [TestMethod()/*, Timeout(1000)*/]
+        [TestMethod(), Timeout(1000)]
         public void SolveTest_Q3RabinKarp()
         {
             RunTest(new Q3RabinKarp("TD3"));

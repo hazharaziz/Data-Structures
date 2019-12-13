@@ -24,144 +24,56 @@ namespace A10
         public override string Process(string inStr) =>
             TestTools.Process(inStr, (Func<string[], string[]>)Solve);
             
-        public Node[] PhoneBookList;
+        public Dictionary<int, string> PhoneBookList;
 
         public string[] Solve(string[] commands)
         {
-
-            long length = commands.Length;
-            PhoneBookList = new Node[length];
+            PhoneBookList = new Dictionary<int, string>();
             List<string> result = new List<string>();
+            bool hasKey = false;
             foreach (var cmd in commands)
             {
                 var toks = cmd.Split();
                 var cmdType = toks[0];
                 var args = toks.Skip(1).ToArray();
                 int number = int.Parse(args[0]);
-                long hash = Hash(number, length);
+                string find = Find(number);
+                hasKey = (find != "not found") ? true : false; 
                 switch (cmdType)
                 {
                     case "add":
-                        Add(args[1], number, hash);
+                        Add(args[1], number, hasKey);
                         break;
                     case "del":
-                        Delete(number, hash);
+                        Delete(number);
                         break;
                     case "find":
-                        result.Add(Find(number, hash));
+                        result.Add(find);
                         break;
                 }
             }
             return result.ToArray();
         }
 
-        public void Add(string name, int number, long hash)
+        public void Add(string name, int number, bool hasKey)
         {
-            Node temp = PhoneBookList[hash];
-            if (temp == null)
-                temp = new Node(name, number);
+            if (hasKey)
+                PhoneBookList[number] = name;
             else
-            {
-                if (Find(number, hash) == "not found")
-                    temp = InsertFront(name, number, temp);
-                else
-                    OverrideNode(name, number, temp);
-            }
-            PhoneBookList[hash] = temp;
+                PhoneBookList.Add(number, name);
         }
 
-        private void OverrideNode(string name, int number, Node temp)
+        public string Find(int number)
         {
-            Node result = temp;
-            while (result != null)
-            {
-                if (result.Contact.Number == number)
-                    result.Contact.Name = name;
-                result = result.Next;
-            }
-        }
-
-        private Node InsertFront(string name, int number, Node temp)
-        {
-            Node newNode = new Node(name, number);
-            newNode.Next = temp;
-            temp = newNode;
-            return temp;
-        }
-
-        public string Find(int number, long hash)
-        {
-            Node temp = PhoneBookList[hash];
-            while (temp != null)
-            {
-                if (temp.Contact.Number == number)
-                    return temp.Contact.Name;
-                temp = temp.Next;
-            }
-            return "not found";
-        }
-
-        public void Delete(int number, long hash)
-        {
-            Node temp = PhoneBookList[hash];
-            if (temp != null)
-            {
-                if (temp.Contact.Number == number)
-                    temp = temp.Next;
-                else
-                {
-                    Node pre = FindPrev(temp, number);
-                    Node next = null;
-                    if (pre.Next != null)
-                    {
-                        next = pre.Next.Next;
-                        pre.Next.Next = null;
-                    }
-                    pre.Next = next;
-                }
-            }
-            PhoneBookList[hash] = temp;
-        }
-
-        public Node FindPrev(Node head, int number)
-        {
-            Node result = head;
-            if (result != null)
-            {
-                while (result.Next != null && result.Next.Contact.Number != number)
-                {
-                    result = result.Next;
-                }
-            }
-            return result;
-        }
-
-        public void AddLast(Node head, string name, int number)
-        {
-            Node newNode = new Node(name, number);
-            if (head == null)
-                head = newNode;
+            if (!PhoneBookList.ContainsKey(number))
+                return "not found";
             else
-            {
-                Node lastNode = GetLastNode(head);
-                lastNode.Next = newNode;
-            }
+                return PhoneBookList[number];
         }
 
-        public Node GetLastNode(Node head)
+        public void Delete(int number)
         {
-            Node temp = head;
-            while (temp.Next != null)
-                temp = temp.Next;
-            return temp;
-        }
-
-        public long Hash(long number, long length)
-        {
-            long p = 1000000007;
-            long a = 100;
-            long b = 200;
-            return ((a * number + b) % p) % length;
+            PhoneBookList.Remove(number);
         }
     }
 }
