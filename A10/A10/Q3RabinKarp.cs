@@ -15,12 +15,19 @@ namespace A10
         public long[] Solve(string pattern, string text)
         {
             List<long> occurrences = new List<long>();
-            int startIdx = 0;
-            int foundIdx = 0;
-            while ((foundIdx = text.IndexOf(pattern, startIdx)) >= startIdx)
+            int P = 1000000007;
+            Random random = new Random();
+            long x = random.Next(1, P - 1);
+            long pHash = Q2HashingWithChain.PolyHash(pattern, 0, 
+                                                     pattern.Length, P, x);
+            long[] Hashes = PreComputeHashes(text, pattern.Length, P, x);
+
+            for (int i = 0; i <= text.Length - pattern.Length; i++)
             {
-                startIdx = foundIdx + 1;
-                occurrences.Add(foundIdx);
+                if (pHash != Hashes[i])
+                    continue;
+                if (text.Substring(i, pattern.Length) == pattern)
+                    occurrences.Add(i);
             }
             return occurrences.ToArray();
         }
