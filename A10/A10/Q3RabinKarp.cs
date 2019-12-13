@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TestCommon;
 
 namespace A10
@@ -26,12 +27,22 @@ namespace A10
 
 
         public static long[] PreComputeHashes(
-            string T, 
-            int P, 
-            long p, 
-            long x)
+            string Text, int P, long p, long x)
         {
-            return new long[] { };
+            int T = Text.Length;
+            long[] result = new long[T - P + 1];
+            string S = Text.Substring(T - P, P);
+            result[T - P] = Q2HashingWithChain.PolyHash(S, 0, S.Length, p, x);
+            long y = 1;
+            for (long i = 1; i <= P; i++)
+                y = (y * x) % p;
+            for (int i = T - P - 1; i >= 0; i--)
+            {
+                result[i] = (x * result[i + 1] + (p * 10) +
+                             Convert.ToInt32(Text[i]) -
+                             (y * Convert.ToInt32(Text[i + P]))) % p;
+            }
+            return result;
         }
     }
 }

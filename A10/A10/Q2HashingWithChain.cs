@@ -24,8 +24,7 @@ namespace A10
                 var toks = cmd.Split();
                 var cmdType = toks[0];
                 var arg = toks[1];
-                hash = PolyHash(arg, arg.Length, arg.Length) % bucketCount;
-
+                hash = PolyHash(arg, 0, arg.Length) % bucketCount;
                 switch (cmdType)
                 {
                     case "add":
@@ -49,15 +48,15 @@ namespace A10
         public const long ChosenX = 263;
 
         public static long PolyHash(
-            string str, int start, int count,
+            string str, int start, int count = 0,
             long p = BigPrimeNumber, long x = ChosenX)
         {
             long hash = 0;
             long ascii;
-            for (int i = start - 1; i >= 0; i--)
+            for (int i = count + start - 1; i >= start; i--)
             {
                 ascii = Convert.ToInt32(str[i]);
-                hash = checked((hash * ChosenX + ascii) % p); 
+                hash = checked(((hash * x) + ascii) % p);
             }
             return hash;
         }

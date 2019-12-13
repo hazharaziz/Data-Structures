@@ -158,7 +158,7 @@ namespace A10
 
         public long Hash(long number, long length)
         {
-            long p = 6721739;
+            long p = 1000000007;
             long a = 100;
             long b = 200;
             return ((a * number + b) % p) % length;
