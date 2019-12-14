@@ -1,5 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+<<<<<<< HEAD
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestCommon", "..\TestCommon\TestCommon.csproj", "{8EC518A7-0B21-42F0-87F6-30A5182E378E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "A9", "A9\A9.csproj", "{9F0363E2-06D9-4415-90E6-8B9CA7816710}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "A9.Tests", "A9.Tests\A9.Tests.csproj", "{27D2BEC6-1A3F-4261-A9AB-BDB70678D9F1}"
+=======
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
@@ -8,6 +18,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A9", "A9\A9.csproj", "{9F0363E2-06D9-4415-90E6-8B9CA7816710}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A9.Tests", "A9.Tests\A9.Tests.csproj", "{27D2BEC6-1A3F-4261-A9AB-BDB70678D9F1}"
+>>>>>>> e701d015ff2d5ef82b234bf54c12bd9a64f68dec
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,9 +29,12 @@ Global
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
+<<<<<<< HEAD
+=======
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+>>>>>>> e701d015ff2d5ef82b234bf54c12bd9a64f68dec
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{8EC518A7-0B21-42F0-87F6-30A5182E378E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8EC518A7-0B21-42F0-87F6-30A5182E378E}.Debug|Any CPU.Build.0 = Debug|Any CPU
@@ -59,4 +73,13 @@ Global
 		{27D2BEC6-1A3F-4261-A9AB-BDB70678D9F1}.Release|x86.ActiveCfg = Release|Any CPU
 		{27D2BEC6-1A3F-4261-A9AB-BDB70678D9F1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
+<<<<<<< HEAD
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E30F1681-B5D8-42D5-BCBA-97EF5B9A3B62}
+	EndGlobalSection
+=======
+>>>>>>> e701d015ff2d5ef82b234bf54c12bd9a64f68dec
 EndGlobal
