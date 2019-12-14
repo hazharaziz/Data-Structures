@@ -13,7 +13,7 @@ namespace A10.Tests
         [TestMethod()]
         public void BloomFilterTest()
         {
-            //Assert.Inconclusive("Not Implemented");
+            Assert.Inconclusive("Not Implemented");
             // تعداد پسوردها - ثابت. عوض نکنید.
             int pwdCount = 1_000_000;
 
