@@ -14,10 +14,9 @@ namespace A10
 
         public Q4BloomFilter(int filterSize, int hashFnCount)
         {
-          // Write your code here to Initialize 'Filter' and 'HashFunctions' ... 
+            // Write your code here to Initialize 'Filter' and 'HashFunctions' ...
         }
 
-        
         public void Add(string str)
         {
             for (int i=0; i< HashFunctions.Length; i++)
