@@ -13,7 +13,7 @@ namespace A11.Tests
             RunTest(new Q1BinaryTreeTraversals("TD1"));
         }
 
-        [TestMethod(), Timeout(1500)]
+        [TestMethod(), Timeout(1800)]
         public void SolveTest_Q2IsItBST()
         {
             RunTest(new Q2IsItBST("TD2"));

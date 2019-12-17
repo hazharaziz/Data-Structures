@@ -13,8 +13,6 @@ namespace A11
             TestTools.Process(inStr, (Func<long[][], bool>)Solve);
 
         public bool Solve(long[][] nodes)
-        {
-            throw new NotImplementedException();
-        }
+            => new BinaryTree<long>(nodes).IsBST();
     }
 }
