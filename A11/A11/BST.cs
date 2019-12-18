@@ -36,26 +36,28 @@ namespace A11
             bool result = true;
             Stack<long> stack = new Stack<long>();
             Node<T> root = Tree[0];
-            long current = 0;
+            root.Min = long.MinValue;
+            root.Max = long.MaxValue;
             long right, left;
-            stack.Push(current);
+            stack.Push(0);
             while (stack.Count != 0)
             {
-                current = stack.Pop();
-                root = Tree[current];
+                root = Tree[stack.Pop()];
                 right = (root.RightChild != -1) ? root.RightChild : -1;
                 left = (root.LeftChild != -1) ? root.LeftChild : -1;
                 if (right != -1)
                 {
                     stack.Push(right);
-                    if (Compare(Tree[right].Key, Tree[current].Key) != 1)
-                        result = false;
+                    Tree[right].Min = ConvertToLong(root.Key);
+                    Tree[right].Max = root.Max;
+                    result = (!Tree[right].isValid()) ? false : result;
                 }
                 if (left != -1)
                 {
                     stack.Push(left);
-                    if (Compare(Tree[left].Key, Tree[current].Key) != -1)
-                        result = false;
+                    Tree[left].Min = root.Min;
+                    Tree[left].Max = ConvertToLong(root.Key);
+                    result = (!Tree[left].isValid()) ? false : result;
                 }
             }
             return result;
@@ -155,5 +157,8 @@ namespace A11
 
             return (a < b) ? -1 : 1;
         }
+
+        public long ConvertToLong(T value)
+            => (long)Convert.ChangeType(value, typeof(long));
     }
 }
