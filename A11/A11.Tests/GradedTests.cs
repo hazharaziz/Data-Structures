@@ -7,19 +7,19 @@ namespace A11.Tests
     [TestClass()]
     public class GradedTests
     {
-        [TestMethod()/*, Timeout(2000)*/]
+        [TestMethod(), Timeout(2000)]
         public void SolveTest_Q1BinaryTreeTraversals()
         {
             RunTest(new Q1BinaryTreeTraversals("TD1"));
         }
 
-        [TestMethod()/*, Timeout(1500)*/]
+        [TestMethod(), Timeout(1500)]
         public void SolveTest_Q2IsItBST()
         {
             RunTest(new Q2IsItBST("TD2"));
         }
 
-        [TestMethod()/*, Timeout(1500)*/]
+        [TestMethod(), Timeout(1500)]
         public void SolveTest_Q3IsItBSTHard()
         {
             RunTest(new Q3IsItBSTHard("TD3"));
