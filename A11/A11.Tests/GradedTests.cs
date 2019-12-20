@@ -16,14 +16,12 @@ namespace A11.Tests
         [TestMethod(), Timeout(1500)]
         public void SolveTest_Q2IsItBST()
         {
-            Assert.Inconclusive();
             RunTest(new Q2IsItBST("TD2"));
         }
 
         [TestMethod(), Timeout(1500)]
         public void SolveTest_Q3IsItBSTHard()
         {
-            Assert.Inconclusive();
             RunTest(new Q3IsItBSTHard("TD3"));
         }
 

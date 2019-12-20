@@ -13,6 +13,6 @@ namespace A11
             TestTools.Process(inStr, (Func<long[][], bool>)Solve);
 
         public bool Solve(long[][] nodes)
-            => new BinaryTree<long>(nodes).IsBST();
+            => Q2IsItBST.IsBST(nodes);
     }
 }
