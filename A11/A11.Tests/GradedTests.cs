@@ -28,14 +28,12 @@ namespace A11.Tests
         [TestMethod(), Timeout(10000)] // change the timeout to 6000 if you could solve it
         public void SolveTest_Q4SetWithRangeSums()
         {
-            Assert.Inconclusive();
             RunTest(new Q4SetWithRangeSums("TD4"));
         }
 
         [TestMethod(), Timeout(6000)]
         public void SolveTest_Q5Rope()
         {
-            Assert.Inconclusive();
             RunTest(new Q5Rope("TD5"));
         }
 
