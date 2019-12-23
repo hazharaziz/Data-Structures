@@ -37,7 +37,30 @@ namespace E2a
             long changeValue, 
             long[] heap)
         {
-            throw new NotImplementedException();
+            long size = heap.Length;
+            heap[changeIndex] += changeValue;   
+            for (long i = (size / 3); i >= 0; i--)
+                SiftDown(heap, i, size);
+            return heap;
+        }
+
+        private void SiftDown(long[] heap, long j, long size)
+        {
+            long minIndex = j;
+            long left = (3 * j + 1);
+            if (left < size && heap[left] <= heap[minIndex])
+                minIndex = left;
+            long middle = (3 * j + 2);
+            if (middle < size && heap[middle] <= heap[minIndex])
+                minIndex = middle;
+            long right = (3 * j + 3);
+            if (right < size && heap[right] <= heap[minIndex])
+                minIndex = right;
+            if (j != minIndex)
+            {
+                (heap[j], heap[minIndex]) = (heap[minIndex], heap[j]);
+                SiftDown(heap, minIndex, size);
+            }
         }
     }
 }
