@@ -15,8 +15,7 @@ namespace E2a.Tests
             RunTest(new Q1BSTInOrderTraverse("TD1"));
         }
 
-
-        [TestMethod(), Timeout(1700)]
+        [TestMethod(), Timeout(1800)]
         public void SolveTest_Q2ThreeChildrenMinHeap()
         {
             RunTest(new Q2ThreeChildrenMinHeap("TD2"));
