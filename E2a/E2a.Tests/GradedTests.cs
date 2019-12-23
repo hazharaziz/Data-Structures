@@ -12,7 +12,6 @@ namespace E2a.Tests
         [TestMethod(), Timeout(2000)]
         public void SolveTest_Q1BSTInOrderTraverse()
         {
-            Assert.Inconclusive();
             RunTest(new Q1BSTInOrderTraverse("TD1"));
         }
 
