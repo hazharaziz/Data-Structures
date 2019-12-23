@@ -21,7 +21,21 @@ namespace E2b
 
         public string[] Solve(long bucketCount)
         {
-            throw new NotImplementedException();            
+            double maxLoadingFactor = 0.9;
+            double p = bucketCount * maxLoadingFactor;
+            List<string> result = new List<string>();
+            Random random = new Random();
+            string s = AllChars[random.Next(0, 60)].ToString();
+            long firstHash = GetBucketNumber(s, bucketCount);
+            long hash = 0;
+            while (result.Count < p)
+            {
+                hash = GetBucketNumber(s + AllChars[random.Next(0, 60)], bucketCount);
+                if (hash == firstHash)
+                    result.Add(s + AllChars[random.Next(0, 60)].ToString());
+                s += AllChars[random.Next(0, 60)];
+            }
+            return result.ToArray();
         }
 
         #region Chars

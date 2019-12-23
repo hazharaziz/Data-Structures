@@ -18,7 +18,7 @@ namespace E2b.Tests
         [TestMethod(), Timeout(15000)]
         public void SolveTest_Q2HashTableAttack()
         {
-            //Assert.Inconclusive();
+            Assert.Inconclusive();
             Processor p = new Q2HashTableAttack("TD2");
             TestTools.RunLocalTest("E2b", p.Process, p.TestDataName, HashVerifier, VerifyResultWithoutOrder: p.VerifyResultWithoutOrder,
                excludedTestCases: p.ExcludedTestCases);
@@ -33,7 +33,6 @@ namespace E2b.Tests
         public static void HashVerifier(string inputFileName, string testResult)
         {
             long bucketCount = long.Parse(File.ReadAllText(inputFileName));
-
             string[] result = testResult.Split(TestTools.IgnoreChars, StringSplitOptions.RemoveEmptyEntries);
             Assert.IsTrue(result.Length == bucketCount * 0.9);
             long bucketNumber = Q2HashTableAttack.GetBucketNumber(result[0], bucketCount);
