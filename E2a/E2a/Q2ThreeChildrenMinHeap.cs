@@ -48,14 +48,11 @@ namespace E2a
         {
             long minIndex = j;
             long left = (3 * j + 1);
-            if (left < size && heap[left] <= heap[minIndex])
-                minIndex = left;
             long middle = (3 * j + 2);
-            if (middle < size && heap[middle] <= heap[minIndex])
-                minIndex = middle;
             long right = (3 * j + 3);
-            if (right < size && heap[right] <= heap[minIndex])
-                minIndex = right;
+            minIndex = (left < size && heap[left] <= heap[minIndex]) ? left : minIndex;
+            minIndex = (middle < size && heap[middle] <= heap[minIndex]) ? middle : minIndex;
+            minIndex = (right < size && heap[right] <= heap[minIndex]) ? right : minIndex;
             if (j != minIndex)
             {
                 (heap[j], heap[minIndex]) = (heap[minIndex], heap[j]);
