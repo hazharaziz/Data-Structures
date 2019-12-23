@@ -9,14 +9,14 @@ namespace E2a.Tests
     [TestClass()]
     public class GradedTests
     {
-        [TestMethod(), Timeout(2600)]
+        [TestMethod(), Timeout(2500)]
         public void SolveTest_Q1BSTInOrderTraverse()
         {
             RunTest(new Q1BSTInOrderTraverse("TD1"));
         }
 
 
-        [TestMethod(), Timeout(1700)]
+        [TestMethod(), Timeout(1500)]
         public void SolveTest_Q2ThreeChildrenMinHeap()
         {
             RunTest(new Q2ThreeChildrenMinHeap("TD2"));
