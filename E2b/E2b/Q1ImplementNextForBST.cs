@@ -26,7 +26,34 @@ namespace E2b
 
         public long Solve(long n, long node, long[] BST)
         {
-            throw new NotImplementedException();            
+            return Next(n, node, BST);
+        }
+
+        private long Next(long n, long node, long[] bst)
+        {
+            if (bst[2 * node + 2] != -1)
+                return LeftDescendant(n, 2 * node + 2, bst);
+            else
+                return RightAscendant(n, node, bst);
+        }
+
+        private long RightAscendant(long n, long node, long[] bst)
+        {
+            long parent = (node - 1) / 2;
+            if (parent == 0 && bst[parent] < bst[node])
+                return -1;
+            if (bst[node] < bst[parent])
+                return parent;
+            else
+                return RightAscendant(n, parent, bst);
+        }
+
+        private long LeftDescendant(long n, long node, long[] bst)
+        {
+            if (bst[2 * node + 1] == -1)
+                return node;
+            else
+                return LeftDescendant(n, 2 * node + 1, bst);
         }
     }
 }

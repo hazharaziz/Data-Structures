@@ -12,14 +12,13 @@ namespace E2b.Tests
         [TestMethod(), Timeout(2000)]
         public void SolveTest_Q1ImplementNextForBST()
         {
-            Assert.Inconclusive();
             RunTest(new Q1ImplementNextForBST("TD1"));
         }
 
         [TestMethod(), Timeout(15000)]
         public void SolveTest_Q2HashTableAttack()
         {
-            Assert.Inconclusive();
+            //Assert.Inconclusive();
             Processor p = new Q2HashTableAttack("TD2");
             TestTools.RunLocalTest("E2b", p.Process, p.TestDataName, HashVerifier, VerifyResultWithoutOrder: p.VerifyResultWithoutOrder,
                excludedTestCases: p.ExcludedTestCases);
