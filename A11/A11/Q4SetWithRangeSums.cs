@@ -32,19 +32,10 @@ namespace A11
 
         public string[] Solve(string[] lines)
         {
-            X = 0;
-            Data = new List<long>();
-            List<string> result = new List<string>();
-            foreach (var line in lines)
-            {
-                char cmd = line[0];
-                string args = line.Substring(1).Trim();
-                var output = CommandDict[cmd](args);
-                if (null != output)
-                    result.Add(output);
-            }
-            return result.ToArray();
+            return new string[lines.Length];
         }
+
+
 
         private long Convert(long i)
             => i = (i + X) % M;
@@ -55,7 +46,6 @@ namespace A11
             int idx = Data.BinarySearch(i);
             if (idx < 0)
                 Data.Insert(~idx, i);
-
             return null;
         }
 
