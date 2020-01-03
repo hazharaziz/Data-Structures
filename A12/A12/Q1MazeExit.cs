@@ -15,6 +15,25 @@ namespace A12
         {
             bool result = false;
             bool[] visited = new bool[nodeCount];
+            Node[] nodes = GetNodes(nodeCount, edges);
+            Queue<long> queue = new Queue<long>();
+            queue.Enqueue(StartNode - 1);
+            long current = 0;
+            while (queue.Count != 0 && !result)
+            {
+                current = (queue.Count != 0) ? queue.Dequeue() : current;
+                visited[current] = true;
+                if (current == EndNode - 1) { result = true; }
+                if (nodes[current] != null)
+                    foreach (long n in nodes[current].Children)
+                        if (!visited[n])
+                            queue.Enqueue(n);
+            }
+            return (result) ? 1 : 0;
+        }
+
+        public static Node[] GetNodes(long nodeCount, long[][] edges)
+        {
             Node[] nodes = new Node[nodeCount];
             for (long i = 0; i < edges.Length; i++)
             {
@@ -27,20 +46,8 @@ namespace A12
                 nodes[start].Children.Add(end);
                 nodes[end].Children.Add(start);
             }
-            Queue<long> queue = new Queue<long>();
-            queue.Enqueue(StartNode - 1);
-            long current = 0;
-            while (queue.Count != 0 && !result)
-            {
-                current = (queue.Count != 0) ? queue.Dequeue() : current;
-                visited[current] = true; 
-                if (current == EndNode - 1) { result = true; }
-                if (nodes[current] != null)
-                    foreach (long n in nodes[current].Children)
-                        if (!visited[n])
-                            queue.Enqueue(n);
-            }
-            return (result) ? 1 : 0;
+
+            return nodes;
         }
-     }
+    }
 }

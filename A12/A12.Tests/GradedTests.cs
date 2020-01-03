@@ -16,7 +16,6 @@ namespace A12.Tests
         [TestMethod(), Timeout(4000)]
         public void SolveTest_Q2AddExitToMaze()
         {
-            Assert.Inconclusive();
             RunTest(new Q2AddExitToMaze("TD2"));
         }
 

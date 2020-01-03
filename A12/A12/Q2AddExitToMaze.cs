@@ -15,7 +15,34 @@ namespace A12
 
         public long Solve(long nodeCount, long[][] edges)
         {
-            throw new NotImplementedException();
+            bool[] visited = new bool[nodeCount];
+            Node[] nodes = Q1MazeExit.GetNodes(nodeCount, edges);
+            long count = 0;
+            for (long i = 0; i < nodeCount; i++)
+            {
+                if (!visited[i])
+                {
+                    Explore(visited, nodes, i);
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        private static void Explore(bool[] visited, Node[] nodes, long i)
+        {
+            long current = i;
+            Stack<long> stack = new Stack<long>();
+            stack.Push(current);
+            while (stack.Count != 0)
+            {
+                current = stack.Pop();
+                visited[current] = true;
+                if (nodes[current] != null)
+                    foreach (long child in nodes[current].Children)
+                        if (!visited[child])
+                            stack.Push(child);
+            }
         }
     }
 }
