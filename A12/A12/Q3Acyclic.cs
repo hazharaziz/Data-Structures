@@ -43,7 +43,7 @@ namespace A12
             return (count != nodeCount) ? 1 : 0;
         }
 
-        private Node[] GetDirectedGraph(long nodeCount, long[][] edges)
+        public static Node[] GetDirectedGraph(long nodeCount, long[][] edges)
         {
             Node[] nodes = new Node[nodeCount];
             long start;

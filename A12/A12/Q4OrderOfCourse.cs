@@ -16,7 +16,33 @@ namespace A12
 
         public long[] Solve(long nodeCount, long[][] edges)
         {
-            throw new NotImplementedException();
+            Node[] nodes = Q3Acyclic.GetDirectedGraph(nodeCount, edges);
+
+            Queue<long> queue = new Queue<long>();
+            for (long i = 0; i < nodeCount; i++)
+                if (nodes[i].InDegree == 0)
+                    queue.Enqueue(i);
+            long[] topologicalSort = new long[nodeCount];
+            long index = 0;
+            long current = 0;
+
+            while (queue.Count != 0)
+            {
+                current = queue.Dequeue();
+                topologicalSort[index] = current + 1;
+                index++;
+                if (nodes[current] != null)
+                    foreach (long child in nodes[current].Children)
+                    {
+                        if (nodes[child] != null)
+                        {
+                            nodes[child].InDegree--;
+                            if (nodes[child].InDegree == 0)
+                                queue.Enqueue(child);
+                        }
+                    }
+            }
+            return topologicalSort;
         }
 
         public override Action<string, string> Verifier { get; set; } = TopSortVerifier;
@@ -45,7 +71,6 @@ namespace A12
                     throw new InvalidDataException(
                         $"{Path.GetFileName(inFileName)}: " +
                         $"Edge dependency violoation: {edge[0]}->{edge[1]}");
-
         }
     }
 }
