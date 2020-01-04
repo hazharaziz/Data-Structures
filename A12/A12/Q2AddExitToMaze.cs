@@ -16,7 +16,7 @@ namespace A12
         public long Solve(long nodeCount, long[][] edges)
         {
             bool[] visited = new bool[nodeCount];
-            Node[] nodes = Q1MazeExit.GetNodes(nodeCount, edges);
+            Node[] nodes = Q1MazeExit.GetUndirectedGraph(nodeCount, edges);
             long count = 0;
             for (long i = 0; i < nodeCount; i++)
             {

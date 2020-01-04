@@ -15,7 +15,7 @@ namespace A12
         {
             bool result = false;
             bool[] visited = new bool[nodeCount];
-            Node[] nodes = GetNodes(nodeCount, edges);
+            Node[] nodes = GetUndirectedGraph(nodeCount, edges);
             Queue<long> queue = new Queue<long>();
             queue.Enqueue(StartNode - 1);
             long current = 0;
@@ -32,7 +32,7 @@ namespace A12
             return (result) ? 1 : 0;
         }
 
-        public static Node[] GetNodes(long nodeCount, long[][] edges)
+        public static Node[] GetUndirectedGraph(long nodeCount, long[][] edges)
         {
             Node[] nodes = new Node[nodeCount];
             for (long i = 0; i < edges.Length; i++)

@@ -22,7 +22,6 @@ namespace A12.Tests
         [TestMethod(), Timeout(300)]
         public void SolveTest_Q3Acyclic()
         {
-            Assert.Inconclusive();
             RunTest(new Q3Acyclic("TD3"));
         }
 
