@@ -14,7 +14,7 @@ namespace A7.Tests
             RunTest(new Q1MaximumGold("TD1"));
         }
 
-        [TestMethod()/*, Timeout(300)*/]
+        [TestMethod(), Timeout(300)]
         public void SolveTest_Q2PartitioningSouvenirs()
         {
             RunTest(new Q2PartitioningSouvenirs("TD2"));
